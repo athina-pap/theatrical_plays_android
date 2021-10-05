@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/theater"
+        android:title="Theater"
+        android:icon="@drawable/ic_theaters"/>
+
+    <item
+        android:id="@+id/movie"
+        android:title="Movies"
+        android:icon="@drawable/ic_movies"/>
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/ic_home"/>
+    <item
+        android:id="@+id/actors"
+        android:title="Actors"
+        android:icon="@drawable/ic_actor"/>
+
+    <item
+        android:id="@+id/search"
+        android:title="Search"
+        android:icon="@drawable/ic_search"/>
+</menu>
