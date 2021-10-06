@@ -55,7 +55,24 @@ public class AdapterTrailer extends RecyclerView.Adapter<RecyclerView.ViewHolder
         menuItemHolder.prod.setText(trailer.getProducer());
         menuItemHolder.desc.setText(trailer.getDescription());
         menuItemHolder.trailer.loadUrl(trailer.getUrl());
-        
+       menuItemHolder.arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (menuItemHolder.expandedView.getVisibility() == v.GONE)
+                {
+                    TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
+                    menuItemHolder.expandedView.setVisibility(v.VISIBLE);
+                    menuItemHolder.arrow.setBackgroundResource(R.drawable.ic_arrow_up);
+                }else
+                {
+                    TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
+                    menuItemHolder.expandedView.setVisibility(v.GONE);
+                    menuItemHolder.arrow.setBackgroundResource(R.drawable.ic_arrow_down);
+                }
+            }
+        });
+
+
 
 
     }
@@ -82,6 +99,9 @@ public class AdapterTrailer extends RecyclerView.Adapter<RecyclerView.ViewHolder
         public TextView desc;
         public TextView prod;
         public TextView title;
+        public Button arrow;
+        ConstraintLayout expandedView;
+
         public MenuItemViewHolder(View itemLayoutView) {
             super(itemLayoutView);
             prod = (TextView)itemLayoutView.findViewById(R.id.prod);
@@ -94,22 +114,7 @@ public class AdapterTrailer extends RecyclerView.Adapter<RecyclerView.ViewHolder
             expandedView = (ConstraintLayout) itemLayoutView.findViewById(R.id.expandedView);
             arrow = (Button) itemLayoutView.findViewById(R.id.arrowBtn);
             cardView = (CardView)itemLayoutView.findViewById(R.id.cardView);
-            arrow.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (expandedView.getVisibility() == v.GONE)
-                    {
-                        TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
-                        expandedView.setVisibility(v.VISIBLE);
-                        arrow.setBackgroundResource(R.drawable.ic_arrow_up);
-                    }else
-                    {
-                        TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
-                        expandedView.setVisibility(v.GONE);
-                        arrow.setBackgroundResource(R.drawable.ic_arrow_down);
-                    }
-                }
-            });
+
         }
 
     }
