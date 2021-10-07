@@ -63,7 +63,7 @@ public class Activity_bio extends AppCompatActivity {
         textView.setText(name);
         mAdapter    = new Adapter(viewItems,this);
         QUEUE = Volley.newRequestQueue(this);
-        URLHTTP = "http://LAPTOP-T6IR0PDS:8080/api/people/"+id+"/productions";
+        URLHTTP = "http://83.212.111.242:8080/api/people/"+id+"/productions";
         httpGET(URLHTTP);
 
         layoutManager = new LinearLayoutManager(this);
