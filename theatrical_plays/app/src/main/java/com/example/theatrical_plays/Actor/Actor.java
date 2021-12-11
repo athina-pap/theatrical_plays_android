@@ -1,9 +1,12 @@
 package com.example.theatrical_plays.Actor;
 
+import org.json.JSONArray;
+
 public class Actor {
 
-    String name, imageUrl;
+    String name;
     int id;
+    String imageUrl;
 
     public Actor(String name, String imageUrl, int id) {
         super();

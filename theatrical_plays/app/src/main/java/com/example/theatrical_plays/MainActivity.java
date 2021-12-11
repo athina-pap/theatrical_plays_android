@@ -3,13 +3,13 @@ package com.example.theatrical_plays;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.theatrical_plays.Actor.ActorFragment;
 import com.example.theatrical_plays.Home.HomeFragment;
+import com.example.theatrical_plays.Venues.TheaterFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {

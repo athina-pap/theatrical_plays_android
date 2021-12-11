@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.theatrical_plays.R;
 import com.squareup.picasso.Picasso;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,7 +26,7 @@ public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final Context mContext;
     //ActorFragment fragmentactor;
     private ClickListener listener;
-    private List<Actor> fullItems;
+
 
 
     public AdapterActor(Context context, List<Actor> recyclerViewItems, ClickListener listener) {
@@ -33,7 +34,7 @@ public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.recyclerViewItems = recyclerViewItems;
         //this.fragmentactor = fragmentactor;
         this.listener = listener;
-        fullItems = new ArrayList<>(recyclerViewItems);
+
 
     }
     @NonNull
@@ -51,11 +52,14 @@ public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         menuItemHolder.name.setText(actor.getName());
         String url = actor.getImageUrl();
-        Picasso.get().load(url).placeholder(R.drawable.ic_actor).into(menuItemHolder.imageUrl);
+        if(!(url.equals(""))) {
+            Picasso.get().load(url).placeholder(R.drawable.ic_actor).into(menuItemHolder.imageUrl);
+        }
+
 
         ((MenuItemViewHolder) holder).imageUrl.setOnClickListener(v -> listener.onClickData(actor.getImageUrl(), actor.getName(), actor.getId()));
 
-        //((MenuItemViewHolder) holder).name.setOnClickListener(v -> listener.onClickData(actor.getName()));
+        //((MenuItemViewHolder) holder).name.setOnClickListener(v -> listener.onClickData(actor.getImageUrl(), actor.getName(), actor.getId()));
 
     }
 

@@ -79,15 +79,6 @@ public class AdapterTrailer extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
 
-        //Uri uri = Uri.parse(url);
-        //menuItemHolder.trailer.setVideoPath(url);
-        //menuItemHolder.trailer.start();
-
-       // menuItemHolder.trailer.setVideoURI(uri);
-        //menuItemHolder.trailer.requestFocus();
-        //menuItemHolder.trailer.start();
-
-
 
     @Override
     public int getItemCount() {

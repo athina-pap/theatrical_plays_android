@@ -7,19 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.theatrical_plays.R;
-import com.google.gson.JsonObject;
+import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -30,8 +28,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.security.AccessController.getContext;
-
 public class Activity_bio extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private List<Object> viewItems = new ArrayList<>();
@@ -39,6 +35,7 @@ public class Activity_bio extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     RequestQueue QUEUE;
     String URLHTTP;
+    SliderView sliderView;
 
 
 
@@ -51,13 +48,17 @@ public class Activity_bio extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
 
 
-        ImageView imageView = findViewById(R.id.bioImage);
+       ImageView imageView = findViewById(R.id.bioImage);
 
         TextView textView = findViewById(R.id.bioName);
 
         Intent intent = getIntent();
         String imageUrl = intent.getStringExtra("image");
-        Picasso.get().load(imageUrl).fit().centerInside().into(imageView);
+
+        if(!(imageUrl.equals("")))
+        {
+            Picasso.get().load(imageUrl).fit().centerInside().into(imageView);
+        }
         String name = intent.getStringExtra("fullName");
         int id = intent.getIntExtra("id",0);
         textView.setText(name);
