@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.theatrical_plays.R;
@@ -22,19 +24,15 @@ import java.util.List;
 
 public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
 
-    private final List<Actor> recyclerViewItems;
-    private final Context mContext;
-    //ActorFragment fragmentactor;
+    private List<Actor> recyclerViewItems;
     private ClickListener listener;
+    public List<Actor> recyclerViewItemsCopy ;
 
 
-
-    public AdapterActor(Context context, List<Actor> recyclerViewItems, ClickListener listener) {
-        this.mContext = context;
+    public AdapterActor( List<Actor> recyclerViewItems, ClickListener listener) {
         this.recyclerViewItems = recyclerViewItems;
-        //this.fragmentactor = fragmentactor;
         this.listener = listener;
-
+        recyclerViewItemsCopy = new ArrayList<>(recyclerViewItems);
 
     }
     @NonNull
@@ -49,7 +47,6 @@ public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull RecyclerView.ViewHolder holder, int position) {
         MenuItemViewHolder menuItemHolder = (MenuItemViewHolder) holder;
         final Actor actor = (Actor) recyclerViewItems.get(position);
-
         menuItemHolder.name.setText(actor.getName());
         String url = actor.getImageUrl();
         if(!(url.equals(""))) {
@@ -59,7 +56,6 @@ public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         ((MenuItemViewHolder) holder).imageUrl.setOnClickListener(v -> listener.onClickData(actor.getImageUrl(), actor.getName(), actor.getId()));
 
-        //((MenuItemViewHolder) holder).name.setOnClickListener(v -> listener.onClickData(actor.getImageUrl(), actor.getName(), actor.getId()));
 
     }
 
@@ -78,17 +74,18 @@ public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         protected FilterResults performFiltering(CharSequence constraint) {
             List<Actor> filteredList = new ArrayList<>();
 
-            if(constraint.toString().isEmpty())
+            if(constraint == null || constraint.length() == 0)
             {
-                   filteredList.addAll(recyclerViewItems);
+                   filteredList.addAll(recyclerViewItemsCopy);
             }else
                 {
-                  //  String filTerPattern = constraint.toString().toLowerCase().trim();
+                   String filTerPattern = constraint.toString().toLowerCase().trim();
 
-                    for (Actor item : recyclerViewItems)
+                    for (Actor item : recyclerViewItemsCopy)
                     {
-                        if (item.getName().toLowerCase().contains(constraint.toString().toLowerCase().trim()))
+                        if (item.getName().toLowerCase().contains(filTerPattern))
                         {
+
                             filteredList.add(item);
                         }
                     }
@@ -101,7 +98,7 @@ public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             recyclerViewItems.clear();
-            recyclerViewItems.addAll((Collection<? extends Actor>) results.values);
+            recyclerViewItems.addAll((List) results.values);
             notifyDataSetChanged();
 
         }

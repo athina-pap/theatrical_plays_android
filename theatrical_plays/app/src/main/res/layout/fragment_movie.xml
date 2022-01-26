@@ -1,14 +1,82 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MovieFragment">
+    tools:context=".Productions.MovieFragment"
+    android:id="@+id/home">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/filters">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/filtersButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Φίλτρα"
+                android:drawableLeft="@drawable/ic_filters"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/expandedView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Διάρκεια"/>
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:value="300"
+                    android:stepSize="5"
+                    android:valueFrom="0"
+                    android:valueTo="300"/>
+
+            </LinearLayout>
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Εφαρμογή"
+                    android:id="@+id/applyFilters"/>
+                <Button
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Καθαρισμός"
+                    android:id="@+id/clear"
+                    android:backgroundTint="@color/cardview_light_background"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/prodView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_below="@+id/filters">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/productions"/>
+    </LinearLayout>
 
-</FrameLayout>
+</RelativeLayout>

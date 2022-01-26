@@ -9,9 +9,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,7 +34,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActorFragment extends Fragment implements ClickListener{
+public class ActorFragment extends Fragment implements ClickListener {
 
 
     public static final String TAG = "MYTAG";
@@ -65,7 +67,7 @@ public class ActorFragment extends Fragment implements ClickListener{
         dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recycle_divider));
         rv.addItemDecoration(dividerItemDecoration);
 
-        mAdapter    = new AdapterActor(getContext(),mRecyclerViewItems,this);
+
         QUEUE = Volley.newRequestQueue(getContext());
         URLHTTP = getResources().getString(R.string.urlserver);
         httpGET(URLHTTP);
@@ -81,7 +83,7 @@ public class ActorFragment extends Fragment implements ClickListener{
         MenuItem searchItem = menu.findItem(R.id.action_search);
         androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) searchItem.getActionView();
 
-     // searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+      searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
       searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -142,7 +144,7 @@ public class ActorFragment extends Fragment implements ClickListener{
             }
 
 
-
+            mAdapter    = new AdapterActor(mRecyclerViewItems,this);
             rv.setAdapter(mAdapter);
 
         } catch (JSONException e) {
@@ -163,4 +165,6 @@ public class ActorFragment extends Fragment implements ClickListener{
         int_detail.putExtra("fullName", value2);
         getActivity().startActivity(int_detail);
     }
+
+
 }

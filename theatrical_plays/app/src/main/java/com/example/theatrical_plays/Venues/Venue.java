@@ -1,10 +1,12 @@
 package com.example.theatrical_plays.Venues;
 
-public class Venue {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Venue implements Serializable {
     int id;
     String address;
     String title;
-
     public Venue(int id, String address, String title) {
         this.id = id;
         this.address = address;

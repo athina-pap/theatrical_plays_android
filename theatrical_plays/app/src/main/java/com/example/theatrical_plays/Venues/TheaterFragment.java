@@ -1,5 +1,6 @@
 package com.example.theatrical_plays.Venues;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,10 +8,12 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,11 +32,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TheaterFragment extends Fragment {
+public class TheaterFragment extends Fragment{
     public static final String TAG = "MYTAG";
     RequestQueue QUEUE;
     String URLHTTP;
-
     private List<Venue> mRecyclerViewItems = new ArrayList<>();
     private AdapterVenue mAdapter;
     RecyclerView rv;
@@ -43,6 +45,7 @@ public class TheaterFragment extends Fragment {
         TheaterFragment fragmentTheater = new TheaterFragment();
         return fragmentTheater;
     }
+
 
     @Override
     public  View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,13 +60,23 @@ public class TheaterFragment extends Fragment {
         dividerItemDecoration.setDrawable(getResources().getDrawable(R.drawable.recycle_divider));
         rv.addItemDecoration(dividerItemDecoration);
 
+
         mAdapter    = new AdapterVenue(mRecyclerViewItems, getContext());
         QUEUE = Volley.newRequestQueue(getContext());
         URLHTTP = getResources().getString(R.string.venues);
         httpGET(URLHTTP);
         setHasOptionsMenu(true);
-
-
+        Button compare = (Button)rootView.findViewById(R.id.compare);
+        compare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mAdapter.venuesClicked != null) {
+                    Intent int_detail = new Intent(getContext(), VenueCompare.class);
+                    int_detail.putExtra("venues", mAdapter.venuesClicked);
+                    getActivity().startActivity(int_detail);
+                }
+            }
+        });
         return rootView;
     }
 
@@ -100,13 +113,10 @@ public class TheaterFragment extends Fragment {
                 String title = jo_inside.getString("title");
                 String address = jo_inside.getString("address");
                 int id = jo_inside.getInt("id");
-
                 Venue venue= new Venue(id, address, title);
                 mRecyclerViewItems.add(venue);
 
             }
-
-
 
             rv.setAdapter(mAdapter);
 
@@ -114,4 +124,6 @@ public class TheaterFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+
 }

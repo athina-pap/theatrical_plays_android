@@ -35,9 +35,7 @@ public class Activity_bio extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     RequestQueue QUEUE;
     String URLHTTP;
-    SliderView sliderView;
-
-
+    String numberOfRoles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +49,8 @@ public class Activity_bio extends AppCompatActivity {
        ImageView imageView = findViewById(R.id.bioImage);
 
         TextView textView = findViewById(R.id.bioName);
-
         Intent intent = getIntent();
         String imageUrl = intent.getStringExtra("image");
-
         if(!(imageUrl.equals("")))
         {
             Picasso.get().load(imageUrl).fit().centerInside().into(imageView);
@@ -62,21 +58,14 @@ public class Activity_bio extends AppCompatActivity {
         String name = intent.getStringExtra("fullName");
         int id = intent.getIntExtra("id",0);
         textView.setText(name);
+
         mAdapter    = new Adapter(viewItems,this);
         QUEUE = Volley.newRequestQueue(this);
         URLHTTP = "http://83.212.111.242:8080/api/people/"+id+"/productions";
         httpGET(URLHTTP);
-
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
-
-        mAdapter = new Adapter(viewItems,this);
         mRecyclerView.setAdapter(mAdapter);
-
-
-
-
-
 
     }
 
@@ -119,6 +108,9 @@ public class Activity_bio extends AppCompatActivity {
                 viewItems.add(bio);
 
             }
+            numberOfRoles = String.valueOf(m_jArry.length());
+            TextView roles= findViewById(R.id.Numrole);
+            roles.setText(numberOfRoles);
             mRecyclerView.setAdapter(mAdapter);
 
         } catch (JSONException e) {

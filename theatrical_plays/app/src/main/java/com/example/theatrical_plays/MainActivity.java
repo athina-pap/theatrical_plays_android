@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.example.theatrical_plays.Actor.ActorFragment;
 import com.example.theatrical_plays.Home.HomeFragment;
+import com.example.theatrical_plays.Productions.MovieFragment;
 import com.example.theatrical_plays.Venues.TheaterFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
