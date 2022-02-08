@@ -87,13 +87,27 @@ public class ActorFragment extends Fragment implements ClickListener {
       searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                return false;
+                if(query != null) {
+                    mRecyclerViewItems.clear();
+                    QUEUE = Volley.newRequestQueue(getContext());
+                    URLHTTP = "http://83.212.111.242:8080/api/people/search?q=fullName~" + query;
+                    httpGET(URLHTTP);
+                    setHasOptionsMenu(true);
+                    return true;
+                }
+                else {
+                    mRecyclerViewItems.clear();
+                    QUEUE = Volley.newRequestQueue(getContext());
+                    URLHTTP = getResources().getString(R.string.urlserver);
+                    httpGET(URLHTTP);
+                    setHasOptionsMenu(true);
+                    return true;
+                }
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mAdapter.getFilter().filter(newText);
-                return true;
+                return false;
             }
         });
 
@@ -142,8 +156,6 @@ public class ActorFragment extends Fragment implements ClickListener {
                 mRecyclerViewItems.add(actor);
 
             }
-
-
             mAdapter    = new AdapterActor(mRecyclerViewItems,this);
             rv.setAdapter(mAdapter);
 

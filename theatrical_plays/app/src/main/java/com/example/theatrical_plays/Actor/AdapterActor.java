@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
+public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Actor> recyclerViewItems;
     private ClickListener listener;
@@ -64,45 +64,45 @@ public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return recyclerViewItems.size();
     }
 
-    @Override
-    public Filter getFilter() {
-        return actorFilter;
-    }
 
-    private Filter actorFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Actor> filteredList = new ArrayList<>();
-
-            if(constraint == null || constraint.length() == 0)
-            {
-                   filteredList.addAll(recyclerViewItemsCopy);
-            }else
-                {
-                   String filTerPattern = constraint.toString().toLowerCase().trim();
-
-                    for (Actor item : recyclerViewItemsCopy)
-                    {
-                        if (item.getName().toLowerCase().contains(filTerPattern))
-                        {
-
-                            filteredList.add(item);
-                        }
-                    }
-                }
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            recyclerViewItems.clear();
-            recyclerViewItems.addAll((List) results.values);
-            notifyDataSetChanged();
-
-        }
-    };
+//    public Filter getFilter() {
+//        return actorFilter;
+//    }
+//
+//    private Filter actorFilter = new Filter() {
+//        @Override
+//        protected FilterResults performFiltering(CharSequence constraint) {
+//            List<Actor> filteredList = new ArrayList<>();
+//
+//            if(constraint == null || constraint.length() == 0)
+//            {
+//                   filteredList.addAll(recyclerViewItemsCopy);
+//            }else
+//                {
+//                   String filTerPattern = constraint.toString().toLowerCase().trim();
+//
+//                    for (Actor item : recyclerViewItemsCopy)
+//                    {
+//                        if (item.getName().toLowerCase().contains(filTerPattern))
+//                        {
+//
+//                            filteredList.add(item);
+//                        }
+//                    }
+//                }
+//            FilterResults results = new FilterResults();
+//            results.values = filteredList;
+//            return results;
+//        }
+//
+//        @Override
+//        protected void publishResults(CharSequence constraint, FilterResults results) {
+//            recyclerViewItems.clear();
+//            recyclerViewItems.addAll((List) results.values);
+//            notifyDataSetChanged();
+//
+//        }
+//    };
 
     private class MenuItemViewHolder extends RecyclerView.ViewHolder {
         public TextView name;

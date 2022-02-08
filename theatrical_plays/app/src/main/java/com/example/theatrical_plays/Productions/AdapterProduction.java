@@ -24,11 +24,13 @@ public class AdapterProduction extends RecyclerView.Adapter<RecyclerView.ViewHol
     private final List<Production> recyclerViewItems;
     private List<Production> recyclerViewItemsCopy;
     private final Context mContext;
+    private boolean checked;
 
-    public AdapterProduction(List<Production> recyclerViewItems, Context mContext) {
+    public AdapterProduction(List<Production> recyclerViewItems, Context mContext, boolean checked) {
         this.recyclerViewItems = recyclerViewItems;
         this.mContext = mContext;
         recyclerViewItemsCopy = new ArrayList<>(recyclerViewItems);
+        this.checked = checked;
     }
 
     @NonNull
@@ -45,6 +47,10 @@ public class AdapterProduction extends RecyclerView.Adapter<RecyclerView.ViewHol
         final Production production = (Production) recyclerViewItems.get(position);
         menuItemHolder.title.setText(production.getTitle());
         menuItemHolder.duration.setText(production.getDuration());
+        if(checked) {
+            recyclerViewItemsCopy.clear();
+            recyclerViewItemsCopy.addAll(recyclerViewItems);
+        }
     }
 
     @Override
@@ -63,11 +69,11 @@ public class AdapterProduction extends RecyclerView.Adapter<RecyclerView.ViewHol
 
             if(duration.equals("300"))
             {
-                filteredList.addAll(recyclerViewItemsCopy);
+                filteredList.addAll(recyclerViewItems);
             }else
             {
 
-                for (Production item : recyclerViewItemsCopy)
+                for (Production item : recyclerViewItems)
                 {
 //
                     if(!item.getDuration().equals( "Not found")) {

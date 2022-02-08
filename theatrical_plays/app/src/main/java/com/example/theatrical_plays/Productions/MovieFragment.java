@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -24,12 +25,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.theatrical_plays.Actor.Actor;
-import com.example.theatrical_plays.Actor.AdapterActor;
 import com.example.theatrical_plays.Actor.ClickListener;
 import com.example.theatrical_plays.R;
-import com.example.theatrical_plays.Venues.Venue;
-import com.example.theatrical_plays.Venues.VenueCompare;
 import com.google.android.material.slider.Slider;
 
 import org.json.JSONArray;
@@ -54,6 +51,10 @@ public class MovieFragment extends Fragment {
     Button applyFilters;
     Button clear;
     Slider duration;
+    CheckBox latest;
+    CheckBox mostEvents;
+    Boolean already = true;
+
     public MovieFragment newInstance() {
         MovieFragment movieFragment = new MovieFragment();
         return movieFragment;
@@ -94,12 +95,25 @@ public class MovieFragment extends Fragment {
         });
         applyFilters = rootView.findViewById(R.id.applyFilters);
         duration = rootView.findViewById(R.id.duration);
-
+        latest = rootView.findViewById(R.id.latest);
+        mostEvents = rootView.findViewById(R.id.most_events);
         applyFilters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int appliedDur = (int)duration.getValue();
-                mAdapter.getFilter().filter(String.valueOf(appliedDur));
+                if(latest.isChecked() && already) {
+                    already = false;
+                    mRecyclerViewItems.clear();
+                    QUEUE = Volley.newRequestQueue(getContext());
+                    URLHTTP = "http://83.212.111.242:8080/api/productions/latest";
+                    httpGET(URLHTTP);
+                    setHasOptionsMenu(true);
+
+                }
+                if(appliedDur < 300) {
+                    mAdapter.getFilter().filter(String.valueOf(appliedDur));
+                }
+
 
             }
 
@@ -111,7 +125,14 @@ public class MovieFragment extends Fragment {
             public void onClick(View view) {
                 duration.setValue(300);
                 int appliedDur = (int)duration.getValue();
-                mAdapter.getFilter().filter(String.valueOf(appliedDur));
+                latest.setChecked(false);
+                mRecyclerViewItems.clear();
+                QUEUE = Volley.newRequestQueue(getContext());
+                URLHTTP = "http://83.212.111.242:8080/api/productions";
+                httpGET(URLHTTP);
+                setHasOptionsMenu(true);
+                already = true;
+
             }
         });
 
@@ -159,7 +180,7 @@ public class MovieFragment extends Fragment {
 
             }
 
-            mAdapter    = new AdapterProduction(mRecyclerViewItems,getContext());
+            mAdapter    = new AdapterProduction(mRecyclerViewItems,getContext(),latest.isChecked());
             rv.setAdapter(mAdapter);
 
         } catch (JSONException e) {
