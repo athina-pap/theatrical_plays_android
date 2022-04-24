@@ -1,25 +1,23 @@
 package com.example.theatrical_plays.Actor;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.theatrical_plays.R;
 import com.squareup.picasso.Picasso;
 
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -27,6 +25,7 @@ public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<Actor> recyclerViewItems;
     private ClickListener listener;
     public List<Actor> recyclerViewItemsCopy ;
+    Context context;
 
 
     public AdapterActor( List<Actor> recyclerViewItems, ClickListener listener) {
@@ -36,12 +35,15 @@ public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     }
     @NonNull
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @org.jetbrains.annotations.NotNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        //LayoutInflater inflater = LayoutInflater.from(context);
         View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.actor_layout, null);
+
         return new MenuItemViewHolder(itemLayoutView);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull RecyclerView.ViewHolder holder, int position) {
@@ -53,10 +55,9 @@ public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             Picasso.get().load(url).placeholder(R.drawable.ic_actor).into(menuItemHolder.imageUrl);
         }
 
+        //((MenuItemViewHolder) holder).imageUrl.setOnClickListener(v -> listener.onClickData(actor.getImageUrl(), actor.getName(), actor.getId()));
 
         ((MenuItemViewHolder) holder).imageUrl.setOnClickListener(v -> listener.onClickData(actor.getImageUrl(), actor.getName(), actor.getId()));
-
-
     }
 
     @Override

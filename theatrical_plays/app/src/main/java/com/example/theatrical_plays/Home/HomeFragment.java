@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
     public static final String TAG = "MYTAG";
     RequestQueue QUEUE;
     String URLHTTP;
-    private List<Object> mRecyclerViewItems = new ArrayList<>();
+    private List<Trailer> mRecyclerViewItems = new ArrayList<>();
     private RecyclerView.Adapter mAdapter;
     RecyclerView rv;
 

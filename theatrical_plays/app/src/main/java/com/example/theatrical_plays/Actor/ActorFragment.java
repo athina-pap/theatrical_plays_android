@@ -2,6 +2,8 @@ package com.example.theatrical_plays.Actor;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.AutoTransition;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,6 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -41,9 +46,14 @@ public class ActorFragment extends Fragment implements ClickListener {
     RequestQueue QUEUE;
     String URLHTTP;
 
-    private List<Actor> mRecyclerViewItems = new ArrayList<>();
+    private ArrayList<Actor> mRecyclerViewItems = new ArrayList<>();
     private AdapterActor mAdapter;
     RecyclerView rv;
+    Button sortButton;
+    LinearLayout expandedActor;
+    LinearLayout homeActor;
+    RadioGroup radioActor;
+    ArrayList<Integer> numbers = new ArrayList<>();
 
 
     public static ActorFragment newInstance()
@@ -72,8 +82,35 @@ public class ActorFragment extends Fragment implements ClickListener {
         URLHTTP = getResources().getString(R.string.urlserver);
         httpGET(URLHTTP);
         setHasOptionsMenu(true);
+        expandedActor = rootView.findViewById(R.id.expandActor);
+        sortButton = rootView.findViewById(R.id.sortButton);
+        homeActor = rootView.findViewById(R.id.actorFragment);
+        radioActor = rootView.findViewById(R.id.radioActor);
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (expandedActor.getVisibility() == v.GONE)
+                {
+                    TransitionManager.beginDelayedTransition(homeActor, new AutoTransition());
+                    expandedActor.setVisibility(v.VISIBLE);
+                }else
+                {
+                    TransitionManager.beginDelayedTransition(homeActor, new AutoTransition());
+                    expandedActor.setVisibility(v.GONE);
+                }
+            }
+        });
 
 
+        radioActor.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i == 1)
+                {
+                    mostRoles();
+                }
+            }
+        });
         return rootView;
     }
 
@@ -115,7 +152,19 @@ public class ActorFragment extends Fragment implements ClickListener {
     }
 
 
+    private void mostRoles()
+    {
 
+        if(mRecyclerViewItems!= null  && mRecyclerViewItems.size()>0) {
+            for (int i = 1 ; i < 20; i++) {
+
+                QUEUE = Volley.newRequestQueue(getContext());
+                URLHTTP = "http://83.212.111.242:8080/api/people/" + mRecyclerViewItems.get(i).getId()+"/productions";
+                httpGETNumber(i, URLHTTP);
+            }
+        }
+
+    }
     public void httpGET(String url)
     {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -152,15 +201,71 @@ public class ActorFragment extends Fragment implements ClickListener {
                 String imagUrl = jo_inside.getString("image");
                 int id = jo_inside.getInt("id");
 
-                Actor actor= new Actor(name,imagUrl,id);
+                Actor actor= new Actor(name,imagUrl, id);
                 mRecyclerViewItems.add(actor);
 
             }
             mAdapter    = new AdapterActor(mRecyclerViewItems,this);
             rv.setAdapter(mAdapter);
-
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+
+
+    }
+    public void httpGETNumber(int i,String url)
+    {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        parsingDataNumber(i,response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                try {
+                    String responseBody = new String(error.networkResponse.data,"utf-8");
+                    Log.d("tag","ERROR "+responseBody);
+                }catch (UnsupportedEncodingException errorr){
+                    Log.d("tag",errorr.toString());
+                }
+            }
+        }
+        );
+        QUEUE.add(stringRequest);
+    }
+
+    public void parsingDataNumber(int i, String jsonData)
+    {
+        try {
+            JSONObject obj = new JSONObject(jsonData);
+            JSONObject m_obj = obj.getJSONObject("data");
+            JSONArray m_jArry = m_obj.getJSONArray("content");
+
+            numbers.add(i ,m_jArry.length());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        if(i ==20)
+        {
+            int max = 0;
+            ArrayList<Actor> newListActor = new ArrayList<>();
+            for (int y =1 ; y<20; y++)
+            {
+                if(numbers.get(y) > max)
+                {
+                    max = numbers.get(y);
+                }
+                else
+                {
+                    newListActor.add(mRecyclerViewItems.get(y));
+                }
+            }
+            mRecyclerViewItems.clear();
+            mRecyclerViewItems.addAll(newListActor);
+            mAdapter     = new AdapterActor(mRecyclerViewItems,this);
+            rv.setAdapter(mAdapter);
         }
     }
 
@@ -177,6 +282,7 @@ public class ActorFragment extends Fragment implements ClickListener {
         int_detail.putExtra("fullName", value2);
         getActivity().startActivity(int_detail);
     }
+
 
 
 }

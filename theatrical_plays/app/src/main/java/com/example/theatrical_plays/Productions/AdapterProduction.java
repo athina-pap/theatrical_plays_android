@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class AdapterProduction extends RecyclerView.Adapter<RecyclerView.ViewHol
     private final List<Production> recyclerViewItems;
     private List<Production> recyclerViewItemsCopy;
     private final Context mContext;
+    public ArrayList<Production> productionsClicked = new ArrayList<>();
     private boolean checked;
 
     public AdapterProduction(List<Production> recyclerViewItems, Context mContext, boolean checked) {
@@ -50,6 +52,22 @@ public class AdapterProduction extends RecyclerView.Adapter<RecyclerView.ViewHol
         if(checked) {
             recyclerViewItemsCopy.clear();
             recyclerViewItemsCopy.addAll(recyclerViewItems);
+        }
+        if(recyclerViewItems != null && recyclerViewItems.size()>0) {
+            menuItemHolder.checkBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (menuItemHolder.checkBox.isChecked()) {
+                        productionsClicked.add(production);
+                        production.setChecked(true);
+                    } else {
+                        productionsClicked.remove(production);
+                        production.setChecked(false);
+                    }
+                }
+            });
+
+            menuItemHolder.checkBox.setChecked(production.isChecked());
         }
     }
 
@@ -102,10 +120,12 @@ public class AdapterProduction extends RecyclerView.Adapter<RecyclerView.ViewHol
     private class MenuItemViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public TextView duration;
+        public CheckBox checkBox;
         public MenuItemViewHolder(@NonNull View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.ProductionTitle);
             duration = (TextView) itemView.findViewById(R.id.duration);
+            checkBox = (CheckBox) itemView.findViewById(R.id.checkedProduction);
         }
     }
 }

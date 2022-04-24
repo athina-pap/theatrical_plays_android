@@ -7,6 +7,8 @@
     <string name="productions">http://83.212.111.242:8080/api/productions</string>
     <string name="latestProductions">http://83.212.111.242:8080/api/productions/latest</string>
     <string name="numper_of_plays">Numper of Plays</string>
+    <string name="underline"><u>Φθινότερο εισητήριο</u></string>
+    <string name="underlineA"><u>Ακριβότερο εισητήριο</u></string>
     <!--<string name="trailerHome">https://run.mocky.io/v3/c69c0748-b43b-4992-9a6e-2d5e1f540788</string>-->
     <string name="trailerHome">http://83.212.111.242:8080/api/productions/search?q=mediaURL~youtube&amp;fbclid=IwAR0PCW9NysrbglcMFt8Rx_P7A_De9QHAnUS-anSg01wo4_2QXG7bXMiMtTw</string>
 </resources>

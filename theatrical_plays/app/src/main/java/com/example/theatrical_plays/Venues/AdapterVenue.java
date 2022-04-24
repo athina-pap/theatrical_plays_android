@@ -56,39 +56,41 @@ public class AdapterVenue extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                     if (menuItemHolder.checkBox.isChecked())
                     {
                         venuesClicked.add(venue);
+                        venue.setChecked(true);
                     }
                     else {
                         venuesClicked.remove(venue);
+                        venue.setChecked(false);
                     }
                 }
             });
 
+            menuItemHolder.checkBox.setChecked(venue.getChecked());
+
+
         }
 
-        menuItemHolder.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String address = menuItemHolder.title.getText().toString();
-                if (address != "ONLINE")
-                {
-                    List<Address> addressVenue = null;
-                    Geocoder geocoder = new Geocoder(mContext);
-                    try {
-                        addressVenue = geocoder.getFromLocationName(address, 2);
-                    }
-                    catch (IOException e)
-                    {
-                        e.printStackTrace();
-                    }
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse("geo:0,0?q="+ Uri.encode(address)));
-                    Intent chooser = Intent.createChooser(intent, "Launch Maps");
-                    mContext.startActivity(chooser);
+        menuItemHolder.button.setOnClickListener(view -> {
+            String address = menuItemHolder.title.getText().toString();
+            if (address != "ONLINE")
+            {
+                List<Address> addressVenue = null;
+                Geocoder geocoder = new Geocoder(mContext);
+                try {
+                    addressVenue = geocoder.getFromLocationName(address, 2);
                 }
-
-
-
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("geo:0,0?q="+ Uri.encode(address)));
+                Intent chooser = Intent.createChooser(intent, "Launch Maps");
+                mContext.startActivity(chooser);
             }
+
+
+
         });
 
 

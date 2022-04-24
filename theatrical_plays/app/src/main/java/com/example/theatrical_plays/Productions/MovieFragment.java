@@ -2,12 +2,6 @@ package com.example.theatrical_plays.Productions;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.util.Log;
@@ -19,13 +13,17 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.theatrical_plays.Actor.ClickListener;
 import com.example.theatrical_plays.R;
 import com.google.android.material.slider.Slider;
 
@@ -52,7 +50,6 @@ public class MovieFragment extends Fragment {
     Button clear;
     Slider duration;
     CheckBox latest;
-    CheckBox mostEvents;
     Boolean already = true;
 
     public MovieFragment newInstance() {
@@ -96,7 +93,6 @@ public class MovieFragment extends Fragment {
         applyFilters = rootView.findViewById(R.id.applyFilters);
         duration = rootView.findViewById(R.id.duration);
         latest = rootView.findViewById(R.id.latest);
-        mostEvents = rootView.findViewById(R.id.most_events);
         applyFilters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,6 +129,17 @@ public class MovieFragment extends Fragment {
                 setHasOptionsMenu(true);
                 already = true;
 
+            }
+        });
+        Button compareProd = rootView.findViewById(R.id.compare_production);
+        compareProd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mAdapter.productionsClicked != null) {
+                    Intent intent = new Intent(getContext(), ProductionActivity.class);
+                    intent.putExtra("productions", mAdapter.productionsClicked);
+                    getActivity().startActivity(intent);
+                }
             }
         });
 
@@ -175,7 +182,7 @@ public class MovieFragment extends Fragment {
                 String duration = jo_inside.getString("duration");
                 int id = jo_inside.getInt("id");
 
-                Production production= new Production(title, duration, id);
+                Production production= new Production(title, duration, id, false);
                 mRecyclerViewItems.add(production);
 
             }

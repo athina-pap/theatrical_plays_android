@@ -1,6 +1,7 @@
 package com.example.theatrical_plays.Home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.transition.AutoTransition;
 import android.transition.TransitionManager;
@@ -11,6 +12,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.theatrical_plays.R;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
+import com.squareup.picasso.Picasso;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -31,13 +37,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class AdapterTrailer extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-    private final List<Object> recyclerViewItems;
+    private final List<Trailer> recyclerViewItems;
     private final Context mContext;
     ConstraintLayout expandedView;
     Button arrow;
     CardView cardView;
 
-    public AdapterTrailer(List<Object> recyclerViewItems, Context mContext) {
+    public AdapterTrailer(List<Trailer> recyclerViewItems, Context mContext) {
         this.recyclerViewItems = recyclerViewItems;
         this.mContext = mContext;
     }
@@ -73,8 +79,6 @@ public class AdapterTrailer extends RecyclerView.Adapter<RecyclerView.ViewHolder
         });
 
 
-
-
     }
 
 
@@ -97,7 +101,6 @@ public class AdapterTrailer extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(itemLayoutView);
             prod = (TextView)itemLayoutView.findViewById(R.id.prod);
             title = (TextView)itemLayoutView.findViewById(R.id.title);
-           // trailer = (VideoView)itemLayoutView.findViewById(R.id.trailer);
             trailer =(WebView) itemLayoutView.findViewById(R.id.trailer);
             trailer.getSettings().setJavaScriptEnabled(true);
             trailer.setWebViewClient(new WebViewClient());

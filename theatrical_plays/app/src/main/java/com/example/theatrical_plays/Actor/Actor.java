@@ -1,19 +1,22 @@
 package com.example.theatrical_plays.Actor;
 
-import org.json.JSONArray;
-
 public class Actor {
 
     String name;
     int id;
     String imageUrl;
 
-    public Actor(String name, String imageUrl, int id) {
+
+    public Actor( String name, String imageUrl, int id) {
         super();
         this.name = name;
         this.imageUrl = imageUrl;
         this.id = id;
     }
+
+    public Actor() {
+    }
+
 
     public String getName() {
         return name;

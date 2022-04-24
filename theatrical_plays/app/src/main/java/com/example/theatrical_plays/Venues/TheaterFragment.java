@@ -113,7 +113,7 @@ public class TheaterFragment extends Fragment{
                 String title = jo_inside.getString("title");
                 String address = jo_inside.getString("address");
                 int id = jo_inside.getInt("id");
-                Venue venue= new Venue(id, address, title);
+                Venue venue= new Venue(id, address, title, false);
                 mRecyclerViewItems.add(venue);
 
             }
