@@ -18,8 +18,5 @@
         android:title="Actors"
         android:icon="@drawable/ic_actor"/>
 
-    <item
-        android:id="@+id/search"
-        android:title="Search"
-        android:icon="@drawable/ic_search"/>
+
 </menu>

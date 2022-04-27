@@ -65,7 +65,7 @@ public class ProductionActivity extends AppCompatActivity {
         for (int i= 0; i<productions.size(); i ++) {
             QUEUE = Volley.newRequestQueue(this);
             labels.add(productions.get(i).getTitle());
-            URLHTTP = "http://83.212.111.242:8080/api/productions/" + productions.get(i).getId() + "/events";
+            URLHTTP = "http://laptop-t6ir0pds:8080/api/productions/" + productions.get(i).getId() + "/events";
             httpGET(URLHTTP);
 
         }

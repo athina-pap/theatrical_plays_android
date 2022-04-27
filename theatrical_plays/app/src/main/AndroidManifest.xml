@@ -22,7 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Theatrical_plays">
         <activity
-            android:name=".Productions.ProductionInfo"
+            android:name=".ProductionInfo"
             android:exported="false" />
         <activity
             android:name=".Venues.VenueCompare"

@@ -94,7 +94,7 @@ public class AdapterProduction extends RecyclerView.Adapter<RecyclerView.ViewHol
                 for (Production item : recyclerViewItems)
                 {
 //
-                    if(!item.getDuration().equals( "Not found")) {
+                    if(!item.getDuration().equals( "Not found") && !item.getDuration().equals("")) {
                         if (parseInt(item.getDuration()) <= Integer.parseInt(duration.toString())) {
 
                             filteredList.add(item);

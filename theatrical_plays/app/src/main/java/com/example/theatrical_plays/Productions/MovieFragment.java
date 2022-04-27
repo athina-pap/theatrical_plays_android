@@ -101,7 +101,7 @@ public class MovieFragment extends Fragment {
                     already = false;
                     mRecyclerViewItems.clear();
                     QUEUE = Volley.newRequestQueue(getContext());
-                    URLHTTP = "http://83.212.111.242:8080/api/productions/latest";
+                    URLHTTP = "http://laptop-t6ir0pds:8080/api/productions/latest";
                     httpGET(URLHTTP);
                     setHasOptionsMenu(true);
 
@@ -124,7 +124,7 @@ public class MovieFragment extends Fragment {
                 latest.setChecked(false);
                 mRecyclerViewItems.clear();
                 QUEUE = Volley.newRequestQueue(getContext());
-                URLHTTP = "http://83.212.111.242:8080/api/productions";
+                URLHTTP = "http://laptop-t6ir0pds:8080/api/productions";
                 httpGET(URLHTTP);
                 setHasOptionsMenu(true);
                 already = true;

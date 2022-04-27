@@ -51,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
                         case R.id.actors:
                             fragment = new ActorFragment();
                             break;
-                        case R.id.search:
-                            fragment = new SearchFragment();
-                            break;
                     }
 
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();

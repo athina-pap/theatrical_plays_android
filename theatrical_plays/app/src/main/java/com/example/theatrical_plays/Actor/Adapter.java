@@ -1,6 +1,7 @@
 package com.example.theatrical_plays.Actor;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.theatrical_plays.ProductionInfo;
 import com.example.theatrical_plays.R;
 
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +22,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private final List<Object> recyclerViewItems;
     private final Context mContext;
+    private ClickListener listener;
 
     public Adapter(List<Object> recyclerViewItems, Context mContext) {
         this.recyclerViewItems = recyclerViewItems;
@@ -42,6 +45,17 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         menuItemHolder.title.setText(bio.getTitle());
         menuItemHolder.role.setText(bio.getRole());
+
+        ((MenuItemViewHolder) holder).title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent int_detail = new Intent(mContext, ProductionInfo.class);
+                int_detail.putExtra("desc",bio.getDesc());
+                int_detail.putExtra("title", bio.getTitle());
+                int_detail.putExtra("producer", bio.getProducer());
+                mContext.startActivity(int_detail);
+            }
+        });
     }
 
     @Override

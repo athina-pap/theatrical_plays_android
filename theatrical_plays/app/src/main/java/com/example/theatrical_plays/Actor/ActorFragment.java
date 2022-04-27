@@ -82,35 +82,9 @@ public class ActorFragment extends Fragment implements ClickListener {
         URLHTTP = getResources().getString(R.string.urlserver);
         httpGET(URLHTTP);
         setHasOptionsMenu(true);
-        expandedActor = rootView.findViewById(R.id.expandActor);
-        sortButton = rootView.findViewById(R.id.sortButton);
         homeActor = rootView.findViewById(R.id.actorFragment);
-        radioActor = rootView.findViewById(R.id.radioActor);
-        sortButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (expandedActor.getVisibility() == v.GONE)
-                {
-                    TransitionManager.beginDelayedTransition(homeActor, new AutoTransition());
-                    expandedActor.setVisibility(v.VISIBLE);
-                }else
-                {
-                    TransitionManager.beginDelayedTransition(homeActor, new AutoTransition());
-                    expandedActor.setVisibility(v.GONE);
-                }
-            }
-        });
 
 
-        radioActor.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(i == 1)
-                {
-                    mostRoles();
-                }
-            }
-        });
         return rootView;
     }
 
@@ -127,7 +101,7 @@ public class ActorFragment extends Fragment implements ClickListener {
                 if(query != null) {
                     mRecyclerViewItems.clear();
                     QUEUE = Volley.newRequestQueue(getContext());
-                    URLHTTP = "http://83.212.111.242:8080/api/people/search?q=fullName~" + query;
+                    URLHTTP = "http://laptop-t6ir0pds/api/people/search?q=fullName~" + query + "&page=2&size=20";
                     httpGET(URLHTTP);
                     setHasOptionsMenu(true);
                     return true;
@@ -151,20 +125,6 @@ public class ActorFragment extends Fragment implements ClickListener {
         super.onCreateOptionsMenu(menu,inflater);
     }
 
-
-    private void mostRoles()
-    {
-
-        if(mRecyclerViewItems!= null  && mRecyclerViewItems.size()>0) {
-            for (int i = 1 ; i < 20; i++) {
-
-                QUEUE = Volley.newRequestQueue(getContext());
-                URLHTTP = "http://83.212.111.242:8080/api/people/" + mRecyclerViewItems.get(i).getId()+"/productions";
-                httpGETNumber(i, URLHTTP);
-            }
-        }
-
-    }
     public void httpGET(String url)
     {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -213,61 +173,9 @@ public class ActorFragment extends Fragment implements ClickListener {
 
 
     }
-    public void httpGETNumber(int i,String url)
-    {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        parsingDataNumber(i,response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                try {
-                    String responseBody = new String(error.networkResponse.data,"utf-8");
-                    Log.d("tag","ERROR "+responseBody);
-                }catch (UnsupportedEncodingException errorr){
-                    Log.d("tag",errorr.toString());
-                }
-            }
-        }
-        );
-        QUEUE.add(stringRequest);
-    }
 
-    public void parsingDataNumber(int i, String jsonData)
-    {
-        try {
-            JSONObject obj = new JSONObject(jsonData);
-            JSONObject m_obj = obj.getJSONObject("data");
-            JSONArray m_jArry = m_obj.getJSONArray("content");
 
-            numbers.add(i ,m_jArry.length());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        if(i ==20)
-        {
-            int max = 0;
-            ArrayList<Actor> newListActor = new ArrayList<>();
-            for (int y =1 ; y<20; y++)
-            {
-                if(numbers.get(y) > max)
-                {
-                    max = numbers.get(y);
-                }
-                else
-                {
-                    newListActor.add(mRecyclerViewItems.get(y));
-                }
-            }
-            mRecyclerViewItems.clear();
-            mRecyclerViewItems.addAll(newListActor);
-            mAdapter     = new AdapterActor(mRecyclerViewItems,this);
-            rv.setAdapter(mAdapter);
-        }
-    }
+
 
     //public void clikcData(String datatitle)
     //{
@@ -283,6 +191,10 @@ public class ActorFragment extends Fragment implements ClickListener {
         getActivity().startActivity(int_detail);
     }
 
+    @Override
+    public void onClickDataProd(String title, Integer id, String desc) {
+        //
+    }
 
 
 }
