@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.theatrical_plays.ProductionInfo;
 import com.example.theatrical_plays.R;
 
 import java.io.IOException;
@@ -47,6 +48,16 @@ public class AdapterVenue extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         final Venue venue = (Venue) recyclerViewItems.get(position);
 
         menuItemHolder.title.setText(venue.getTitle());
+        menuItemHolder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent int_detail = new Intent(mContext, TheatersInfo.class);
+                int_detail.putExtra("address", venue.getAddress());
+                int_detail.putExtra("id",venue.getId());
+                int_detail.putExtra("title", venue.getTitle());
+                mContext.startActivity(int_detail);
+            }
+        });
         menuItemHolder.address.setText(venue.getAddress());
         if(recyclerViewItems != null && recyclerViewItems.size()>0)
         {

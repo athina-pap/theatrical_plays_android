@@ -3,24 +3,33 @@ package com.example.theatrical_plays.Productions;
 public class Events {
     private int id;
     private String priceRange;
-    private long date;
-    private String title;
-    private String venueName;
+    private String VenueName, title, address;
 
-    public Events(int id, String priceRange, long date, String title, String venueName) {
+
+    public Events(int id, String priceRange, String title, String address, String VenueName) {
         this.id = id;
         this.priceRange = priceRange;
-        this.date = date;
         this.title = title;
-        this.venueName = venueName;
+        this.address = address;
+        this.VenueName = VenueName;
+
+
     }
 
     public String getVenueName() {
-        return venueName;
+        return VenueName;
     }
 
     public void setVenueName(String venueName) {
-        this.venueName = venueName;
+        VenueName = venueName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getId() {
@@ -37,14 +46,6 @@ public class Events {
 
     public void setPriceRange(String priceRange) {
         this.priceRange = priceRange;
-    }
-
-    public long getDate() {
-        return date;
-    }
-
-    public void setDate(long date) {
-        this.date = date;
     }
 
     public String getTitle() {

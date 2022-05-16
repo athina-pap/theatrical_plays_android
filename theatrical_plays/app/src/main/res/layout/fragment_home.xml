@@ -1,14 +1,420 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Home.HomeFragment"
     android:id="@+id/home">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/homeview"/>
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="ΘΕΑΤΡΑ-ΠΑΡΑΣΤΑΣΕΙΣ"
+        android:id="@+id/titlemain"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/titleactor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Ηθοποιοί"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titlemain" />
+    <LinearLayout
+        android:id="@+id/linearimage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleactor"
+        android:layout_marginTop="10dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#2d2d2d"
+                    android:scaleType="centerCrop" />
+
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/actorN"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Γιώργος Καραμίχος"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            app:cardCornerRadius="50dp"
+            android:layout_marginLeft="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#2d2d2d"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/actor2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Γιώργος Νινιός"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            app:cardCornerRadius="50dp"
+            android:layout_marginLeft="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#2d2d2d"
+                android:scaleType="centerCrop"
+                />
+        </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/actor3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintTop_toBottomOf="@+id/cardView3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Γιώργος Παπαγεωργίου"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/moreActors"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearimage"
+        android:text="Περισσότερα" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moreActors"
+        tools:layout_editor_absoluteY="252dp" />
+
+    <TextView
+        android:id="@+id/titleproduction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Παραστάσεις"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+    <LinearLayout
+        android:id="@+id/linearimageprod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleproduction"
+        android:layout_marginTop="10dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardprod1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
+
+                <ImageView
+                    android:id="@+id/imageprod1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#2d2d2d"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/movie"/>
+
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/production1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardprod1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Το δικό μας Σινεμά"/>
+            <!--509-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardprod2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                app:cardCornerRadius="10dp"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageprod2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#2d2d2d"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/movie"/>
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/production2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintTop_toBottomOf="@+id/cardprod2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Οι Άθλοι του Ηρακλή"/>
+            <!--506-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardprod3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                app:cardCornerRadius="10dp"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageprod3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#2d2d2d"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/movie"/>
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/production3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintTop_toBottomOf="@+id/cardprod3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Ποντικοπαγίδα"/>
+                <!--507-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/moreProductions"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearimageprod"
+        android:text="Περισσότερα" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moreProductions"
+        tools:layout_editor_absoluteY="252dp" />
+    <TextView
+        android:id="@+id/titlevenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Ηθοποιοί"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+    <LinearLayout
+        android:id="@+id/linearimageVenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titlevenue"
+        android:layout_marginTop="10dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewVenue1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageVenue1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#2d2d2d"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/theaters"/>
+
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/venue1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewVenue1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Γιώργος Καραμίχος"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewVenue2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                app:cardCornerRadius="10dp"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageVenue2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#2d2d2d"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/theaters"/>
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/venue2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewVenue2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Γιώργος Νινιός"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewVenue3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                app:cardCornerRadius="10dp"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageVenue3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#2d2d2d"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/theaters"
+                    />
+            </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/venue3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:layout_marginLeft="30dp"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewVenue3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Γιώργος Παπαγεωργίου"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/moreVenues"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearimage"
+        android:text="Περισσότερα" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -45,7 +46,6 @@ public class Activity_bio extends AppCompatActivity{
         setContentView(R.layout.activity_bio);
 
         mRecyclerView = (RecyclerView)findViewById(R.id.roles);
-        mRecyclerView.setHasFixedSize(true);
 
         images = findViewById(R.id.bioImage);
 
@@ -107,8 +107,9 @@ public class Activity_bio extends AppCompatActivity{
                     String title = jo_inside.getString("title");
                     String description = jo_inside.getString("description");
                     String producer = jo_inside.getString("producer");
+                    String url = jo_inside.getString("mediaURL");
 
-                    Bio bio = new Bio(role, title, id, description, producer);
+                    Bio bio = new Bio(role, title, id, description, producer, url);
                     viewItems.add(bio);
                 }
                 numberOfRoles = String.valueOf(m_jArry.length());

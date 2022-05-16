@@ -1,4 +1,4 @@
-package com.example.theatrical_plays;
+package com.example.theatrical_plays.Venues;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -19,11 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.denzcoskun.imageslider.models.SlideModel;
-import com.example.theatrical_plays.Actor.Adapter;
-import com.example.theatrical_plays.Actor.AdapterActor;
-import com.example.theatrical_plays.Actor.Bio;
+import com.example.theatrical_plays.AdapterEvent;
 import com.example.theatrical_plays.Productions.Events;
+import com.example.theatrical_plays.Productions.Production;
 import com.example.theatrical_plays.R;
 
 import org.json.JSONArray;
@@ -34,51 +31,36 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductionInfo extends AppCompatActivity {
-
+public class TheatersInfo extends AppCompatActivity {
     RequestQueue QUEUE;
     String URLHTTP;
     private RecyclerView mRecyclerView;
-    private List<Events> eventsList = new ArrayList<>();
-    private AdapterEvent mAdapter;
+    private List<Production> productionList = new ArrayList<>();
+    private AdapterVenueInfo mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_production_info);
-        TextView textView = findViewById(R.id.title_prod);
-        TextView description = findViewById(R.id.description_prod);
-        TextView producer = findViewById(R.id.Producer);
+        setContentView(R.layout.activity_theaters_info);
+
+        TextView textView = findViewById(R.id.title_venue);
+        TextView address = findViewById(R.id.addressInfo);
         Intent intent = getIntent();
-        mRecyclerView = findViewById(R.id.events_production);
+        mRecyclerView = findViewById(R.id.production_per_theater);
+        String addressIntent = intent.getStringExtra("address");
         String title = intent.getStringExtra("title");
-        String Desc = intent.getStringExtra("desc");
-        String prod = intent.getStringExtra("producer");
-        String url = intent.getStringExtra("url");
         int id = intent.getIntExtra("id", 0);
         textView.setText(title);
-        description.setText(Desc);
-        String prod1 = prod.replaceAll("\\s+ ", " ");
-        prod.replace("\r\n", "");
-        producer.setText(prod1);
-        mAdapter    = new AdapterEvent(eventsList,this);
+        address.setText(addressIntent);
+        mAdapter    = new AdapterVenueInfo(productionList,this);
         QUEUE = Volley.newRequestQueue(this);
-        URLHTTP = "http://laptop-t6ir0pds:8080/api/productions/"+id+"/events";
+        URLHTTP = "http://laptop-t6ir0pds:8080/api/venues/"+id+"/productions";
         httpGET(URLHTTP);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
-        Button trailer = findViewById(R.id.trailer_button);
-        trailer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse(url);
-                Intent intent1 = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent1);
-            }
-        });
-    }
 
+    }
     public void httpGET(String url)
     {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -107,17 +89,20 @@ public class ProductionInfo extends AppCompatActivity {
         try {
             JSONObject obj = new JSONObject(jsonData);
             JSONArray m_jArry = obj.getJSONArray("data");
-                for (int i = 0; i < m_jArry.length(); i++) {
-                    JSONObject jo_inside = m_jArry.getJSONObject(i);
-                    Integer id = jo_inside.getInt("eventId");
-                    String priceRange = jo_inside.getString("priceRange");
-                    String title = jo_inside.getString("title");
-                    String address = jo_inside.getString("address");
-                    Events events = new Events(id, priceRange, title, address, "");
-                    eventsList.add(events);
-                }
-                mAdapter    = new AdapterEvent(eventsList,this);
-                mRecyclerView.setAdapter(mAdapter);
+            for (int i = 0; i < m_jArry.length(); i++) {
+                JSONObject jo_inside = m_jArry.getJSONObject(i);
+                String title = jo_inside.getString("title");
+                String duration = jo_inside.getString("duration");
+                String producer = jo_inside.getString("producer");
+                String description = jo_inside.getString("description");
+                int id = jo_inside.getInt("id");
+                String url = jo_inside.getString("mediaURL");
+
+                Production production= new Production(title, duration, description, producer, id, false, url);
+                productionList.add(production);
+            }
+            mAdapter    = new AdapterVenueInfo(productionList,this);
+            mRecyclerView.setAdapter(mAdapter);
 
 
         } catch (JSONException e) {

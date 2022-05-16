@@ -95,14 +95,41 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="45dp">
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/bio_title">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Βιογραφία"
+                android:textColor="@color/teal_700"
+                android:textSize="25sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/bio_title"
+            android:id="@+id/bio">
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/cardview_light_background"
+            android:text="Ο ηθοποιός είναι καλλιτέχνης που συμμετέχει σε θεατρική παράσταση ή σε κινηματογραφικό, τηλεοπτικό, ραδιοφωνικό έργο και ερμηνεύει ρόλο. Η λέξη ηθοποιός είναι σύνθετη και αποτελείται από το ουσιαστικό ήθος και το ρήμα ποιώ. Ηθοποιός σημαίνει αυτός που φτιάχνει -υποδύεται- κάποιον χαρακτήρα."
+             />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/bio"
+            android:id="@+id/parast">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -112,18 +139,21 @@
                     android:textSize="25sp" />
         </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/roles"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/parast"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="fill_horizontal"
+            >
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/roles"
+                />
         </LinearLayout>
-    </LinearLayout>
-
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

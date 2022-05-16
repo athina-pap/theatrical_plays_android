@@ -198,10 +198,9 @@ public class ProductionActivity extends AppCompatActivity {
                 JSONObject jo_inside = m_jArry.getJSONObject(i);
                 String priceRange = jo_inside.getString("priceRange");
                 String title = jo_inside.getString("title");
-                long date = jo_inside.getLong("date");
                 int id = jo_inside.getInt("eventId");
 
-                Events e = new Events(id, priceRange, date, prodTitle, title);
+                Events e = new Events(id, priceRange, prodTitle,"", title);
                 events.add(e);
 
             }

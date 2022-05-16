@@ -3,6 +3,7 @@ package com.example.theatrical_plays.Productions;
 import static java.lang.Integer.parseInt;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.theatrical_plays.Actor.Actor;
+import com.example.theatrical_plays.Actor.Adapter;
+import com.example.theatrical_plays.ProductionInfo;
 import com.example.theatrical_plays.R;
 import com.example.theatrical_plays.Venues.Venue;
 
@@ -48,6 +51,18 @@ public class AdapterProduction extends RecyclerView.Adapter<RecyclerView.ViewHol
         AdapterProduction.MenuItemViewHolder menuItemHolder = (AdapterProduction.MenuItemViewHolder) holder;
         final Production production = (Production) recyclerViewItems.get(position);
         menuItemHolder.title.setText(production.getTitle());
+        menuItemHolder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent int_detail = new Intent(mContext, ProductionInfo.class);
+                int_detail.putExtra("desc",production.getDesc());
+                int_detail.putExtra("id",production.getId());
+                int_detail.putExtra("title", production.getTitle());
+                int_detail.putExtra("producer", production.getProducer());
+                int_detail.putExtra("url", production.getUrl());
+                mContext.startActivity(int_detail);
+            }
+        });
         menuItemHolder.duration.setText(production.getDuration());
         if(checked) {
             recyclerViewItemsCopy.clear();

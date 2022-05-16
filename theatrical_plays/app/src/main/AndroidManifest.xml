@@ -22,6 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Theatrical_plays">
         <activity
+            android:name=".Venues.TheatersInfo"
+            android:exported="false" />
+        <activity
             android:name=".ProductionInfo"
             android:exported="false" />
         <activity

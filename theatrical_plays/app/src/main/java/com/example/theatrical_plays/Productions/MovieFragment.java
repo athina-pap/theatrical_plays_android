@@ -180,9 +180,12 @@ public class MovieFragment extends Fragment {
                 JSONObject jo_inside = m_jArry.getJSONObject(i);
                 String title = jo_inside.getString("title");
                 String duration = jo_inside.getString("duration");
+                String producer = jo_inside.getString("producer");
+                String description = jo_inside.getString("description");
                 int id = jo_inside.getInt("id");
+                String url = jo_inside.getString("mediaURL");
 
-                Production production= new Production(title, duration, id, false);
+                Production production= new Production(title, duration, description, producer, id, false, url);
                 mRecyclerViewItems.add(production);
 
             }

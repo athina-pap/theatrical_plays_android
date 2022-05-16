@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/cardview_shadow_start_color"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp"
+    app:contentPadding="5dp"
+    android:layout_margin="7dp"
+    android:id="@+id/card_view"
+    android:orientation="horizontal">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/eventTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:scaleType="centerCrop"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/addressText"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/eventTitle"
+            android:text="Διέυθηνση: "
+            app:layout_constraintRight_toLeftOf="@+id/eventAddress"
+            android:textColor="@color/design_default_color_on_primary"
+            android:textSize="16sp" />
+        <TextView
+            android:id="@+id/eventAddress"
+            android:layout_width="236dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/eventTitle"
+            app:layout_constraintLeft_toRightOf="@+id/addressText"
+            android:textColor="@color/design_default_color_on_primary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/priceText"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="Τιμή εισητηρίου:"
+            app:layout_constraintTop_toBottomOf="@+id/eventAddress"
+            app:layout_constraintRight_toLeftOf="@+id/eventPrices"
+            android:textColor="@color/design_default_color_on_primary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/eventPrices"
+            android:layout_width="236dp"
+            android:layout_height="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/eventAddress"
+            app:layout_constraintLeft_toRightOf="@+id/priceText"
+            android:textColor="@color/design_default_color_on_primary"
+            android:textSize="16sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>

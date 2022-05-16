@@ -2,7 +2,7 @@ package com.example.theatrical_plays.Actor;
 
 public class Bio {
 
-    String role, title, desc, producer;
+    String role, title, desc, producer, url;
     Integer id;
 
     public Integer getId() {
@@ -13,12 +13,21 @@ public class Bio {
         this.id = id;
     }
 
-    public Bio(String role, String title, int id, String desc, String producer) {
+    public Bio(String role, String title, int id, String desc,  String producer, String url) {
         this.role = role;
         this.title = title;
         this.id = id;
         this.desc = desc;
         this.producer = producer;
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getProducer() {

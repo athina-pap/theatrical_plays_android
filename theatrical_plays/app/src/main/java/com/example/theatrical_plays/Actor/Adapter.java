@@ -51,8 +51,10 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
             public void onClick(View v) {
                 Intent int_detail = new Intent(mContext, ProductionInfo.class);
                 int_detail.putExtra("desc",bio.getDesc());
+                int_detail.putExtra("id",bio.getId());
                 int_detail.putExtra("title", bio.getTitle());
                 int_detail.putExtra("producer", bio.getProducer());
+                int_detail.putExtra("url", bio.getUrl());
                 mContext.startActivity(int_detail);
             }
         });

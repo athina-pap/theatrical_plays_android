@@ -4,15 +4,42 @@ import java.io.Serializable;
 
 public class Production implements Serializable {
     private String title;
-    private String duration;
+    private String duration, producer, desc, url;
     private int id;
     private boolean checked;
 
-    public Production(String title, String duration, int id, boolean checked) {
+    public Production(String title, String duration, String desc, String producer, int id, boolean checked, String url) {
         this.title = title;
         this.duration = duration;
         this.id = id;
         this.checked = checked;
+        this.desc = desc;
+        this.producer = producer;
+        this.url = url;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getProducer() {
+        return producer;
+    }
+
+    public void setProducer(String producer) {
+        this.producer = producer;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public boolean isChecked() {
