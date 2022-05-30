@@ -1,54 +1,20 @@
 package com.example.theatrical_plays.Home;
-
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.transition.AutoTransition;
-import android.transition.TransitionManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CalendarView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.theatrical_plays.Actor.Activity_bio;
-import com.example.theatrical_plays.Actor.Actor;
-import com.example.theatrical_plays.Actor.ActorFragment;
-import com.example.theatrical_plays.Actor.AdapterActor;
 import com.example.theatrical_plays.MainActivity;
 import com.example.theatrical_plays.ProductionInfo;
 import com.example.theatrical_plays.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.theatrical_plays.Venues.TheatersInfo;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class HomeFragment extends Fragment {
 
     ImageView image1;
@@ -57,6 +23,7 @@ public class HomeFragment extends Fragment {
     TextView actorn;
     TextView actor2;
     TextView actor3;
+    Button moreactors;
 
     public static HomeFragment newInstance()
     {
@@ -81,7 +48,7 @@ public class HomeFragment extends Fragment {
         Picasso.get().load("https://image.tmdb.org/t/p/w300/mR3QlGx3y68uVZriNzoOLOnwPy.jpg").into(image2);
         image3 = rootView.findViewById(R.id.image3);
         Picasso.get().load("https://image.tmdb.org/t/p/w300/oiectxNJB7ctBwRKY45ChonEbjw.jpg").into(image3);
-
+        moreactors = rootView.findViewById(R.id.moreActors);
         actorn = rootView.findViewById(R.id.actorN);
         actor2 = rootView.findViewById(R.id.actor2);
         actor3 = rootView.findViewById(R.id.actor3);
@@ -119,13 +86,14 @@ public class HomeFragment extends Fragment {
                                   });
 
 
-        Button moreActors = rootView.findViewById(R.id.moreActors);
-        moreActors.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(rootView).navigate(R.id.to_actor);
-            }
-        });
+       moreactors.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent int_detail = new Intent(getContext(), MainActivity.class);
+               int_detail.putExtra("prod", 1);
+               getActivity().startActivity(int_detail);
+           }
+       });
 
         ImageView prod1 = rootView.findViewById(R.id.imageprod1);
         ImageView prod2 = rootView.findViewById(R.id.imageprod2);
@@ -173,14 +141,62 @@ public class HomeFragment extends Fragment {
         });
 
         Button moreProductions = rootView.findViewById(R.id.moreProductions);
-        moreActors.setOnClickListener(new View.OnClickListener() {
+        moreProductions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActorFragment fragment = new ActorFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.home, fragment, "findThisFragment")
-                        .addToBackStack(null)
-                        .commit();
+                Intent int_detail = new Intent(getContext(), MainActivity.class);
+                int_detail.putExtra("prod", 2);
+                getActivity().startActivity(int_detail);
+            }
+        });
+
+
+        ImageView venue1 = rootView.findViewById(R.id.imageVenue1);
+        ImageView venue2 = rootView.findViewById(R.id.imageVenue2);
+        ImageView venue3 = rootView.findViewById(R.id.imageVenue3);
+
+        venue1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent int_detail = new Intent(getContext(), TheatersInfo.class);
+                int_detail.putExtra("id", 302);
+                int_detail.putExtra("title","Νέος Ακάδημος");
+                int_detail.putExtra("address", "Athens, Αττική");
+                getActivity().startActivity(int_detail);
+            }
+        });
+
+
+        venue2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent int_detail = new Intent(getContext(), TheatersInfo.class);
+                int_detail.putExtra("id", 303);
+                int_detail.putExtra("title","Θέατρο Μικρο Χορν");
+                int_detail.putExtra("address", "Κολωνάκι, Αττική");
+                getActivity().startActivity(int_detail);
+            }
+        });
+
+
+        venue3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent int_detail = new Intent(getContext(), TheatersInfo.class);
+                int_detail.putExtra("id", 305);
+                int_detail.putExtra("title","Σύγχρονο Θέατρο");
+                int_detail.putExtra("address", "Κεραμεικός, Αττική");
+                getActivity().startActivity(int_detail);
+            }
+        });
+
+        Button moreVenues = rootView.findViewById(R.id.moreVenues);
+        moreVenues.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent int_detail = new Intent(getContext(), MainActivity.class);
+                int_detail.putExtra("prod", 3);
+                getActivity().startActivity(int_detail);
             }
         });
         return rootView;

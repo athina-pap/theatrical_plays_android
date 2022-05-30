@@ -35,7 +35,7 @@
             android:id="@+id/mapVenues"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Βρείτε τα στο χάρτι"
+            android:text="Βρείτε τα στο χάρτη"
             />
     </LinearLayout>
 

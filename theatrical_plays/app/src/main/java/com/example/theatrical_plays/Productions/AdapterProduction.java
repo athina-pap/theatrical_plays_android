@@ -4,6 +4,7 @@ import static java.lang.Integer.parseInt;
 
 import android.content.Context;
 import android.content.Intent;
+import android.text.format.Time;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,13 @@ import com.example.theatrical_plays.ProductionInfo;
 import com.example.theatrical_plays.R;
 import com.example.theatrical_plays.Venues.Venue;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.SimpleTimeZone;
 
 public class AdapterProduction extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements Filterable {
     private final List<Production> recyclerViewItems;
@@ -105,13 +111,14 @@ public class AdapterProduction extends RecyclerView.Adapter<RecyclerView.ViewHol
                 filteredList.addAll(recyclerViewItems);
             }else
             {
-
                 for (Production item : recyclerViewItems)
                 {
-//
                     if(!item.getDuration().equals( "Not found") && !item.getDuration().equals("")) {
-                        if (parseInt(item.getDuration()) <= Integer.parseInt(duration.toString())) {
-
+                        String[] p =  item.getDuration().split("'");
+                        String[] p2 = p[0].split(":");
+                        int t1 = parseInt(p2[0]) * 60;
+                        int t2 = t1 + parseInt(p2[1]);
+                        if (t2 < parseInt(String.valueOf(duration))) {
                             filteredList.add(item);
                         }
                     }
