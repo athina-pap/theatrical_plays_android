@@ -21,9 +21,7 @@ import java.util.List;
 public class AdapterVenueInfo extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @NonNull
     private final List<Production> recyclerViewItems;
-    private List<Production> recyclerViewItemsCopy;
     private final Context mContext;
-    public ArrayList<Production> productionsClicked = new ArrayList<>();
 
     public AdapterVenueInfo(@NonNull List<Production> recyclerViewItems, Context mContext) {
         this.recyclerViewItems = recyclerViewItems;
@@ -32,7 +30,7 @@ public class AdapterVenueInfo extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_theaters_info, null);
+        View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.groub_item, null);
         return new MenuItemViewHolder(itemLayoutView);
     }
 
@@ -53,7 +51,6 @@ public class AdapterVenueInfo extends RecyclerView.Adapter<RecyclerView.ViewHold
                 mContext.startActivity(int_detail);
             }
         });
-        menuItemHolder.duration.setText(production.getDuration());
     }
 
 
@@ -64,11 +61,9 @@ public class AdapterVenueInfo extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private class MenuItemViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
-        public TextView duration;
         public MenuItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.ProductionTitle);
-            duration = (TextView) itemView.findViewById(R.id.duration);
+            title = (TextView) itemView.findViewById(R.id.productionTitlEvent);
         }
     }
 }

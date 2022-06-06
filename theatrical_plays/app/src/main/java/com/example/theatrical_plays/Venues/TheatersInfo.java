@@ -54,7 +54,7 @@ public class TheatersInfo extends AppCompatActivity {
         address.setText(addressIntent);
         mAdapter    = new AdapterVenueInfo(productionList,this);
         QUEUE = Volley.newRequestQueue(this);
-        URLHTTP = "http://laptop-t6ir0pds:8080/api/venues/"+id+"/productions";
+        URLHTTP = "http://192.168.1.3:8080/api/venues/"+id+"/productions";
         httpGET(URLHTTP);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -84,11 +84,12 @@ public class TheatersInfo extends AppCompatActivity {
         QUEUE.add(stringRequest);
     }
 
-    public void parsingData(String jsonData)
+    private void parsingData(String jsonData)
     {
         try {
             JSONObject obj = new JSONObject(jsonData);
-            JSONArray m_jArry = obj.getJSONArray("data");
+            JSONObject m_obj = obj.getJSONObject("data");
+            JSONArray m_jArry = m_obj.getJSONArray("content");
             for (int i = 0; i < m_jArry.length(); i++) {
                 JSONObject jo_inside = m_jArry.getJSONObject(i);
                 String title = jo_inside.getString("title");
@@ -103,6 +104,7 @@ public class TheatersInfo extends AppCompatActivity {
             }
             mAdapter    = new AdapterVenueInfo(productionList,this);
             mRecyclerView.setAdapter(mAdapter);
+
 
 
         } catch (JSONException e) {
