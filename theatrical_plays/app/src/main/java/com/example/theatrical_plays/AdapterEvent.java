@@ -44,6 +44,10 @@ public class AdapterEvent extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         menuItemHolder.title.setText(events.getTitle());
         menuItemHolder.address.setText(events.getAddress());
         menuItemHolder.price.setText(events.getPriceRange());
+        if(getItemCount() == 0)
+        {
+            menuItemHolder.title.setText("Δεν υπάρχουν διοργανώσεις για αυτή την παράσταση");
+        }
 
     }
 

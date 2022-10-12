@@ -38,13 +38,13 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigationView.setSelectedItemId(R.id.movie);
         }
         if(type == 3) {
-            bottomNavigationView.getMenu().getItem(0).setChecked(true);
+            bottomNavigationView.getMenu().getItem(2).setChecked(true);
             bottomNavigationView.setSelectedItemId(R.id.theater);
         }
         else {
-            bottomNavigationView.getMenu().getItem(2).setChecked(true);
+            bottomNavigationView.getMenu().getItem(0).setChecked(true);
         }
-        getSupportActionBar().setTitle("Theatrical Analytics for Android");
+        getSupportActionBar().setTitle("Theatrical data Analytics");
     }
 
     public BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod= item -> {

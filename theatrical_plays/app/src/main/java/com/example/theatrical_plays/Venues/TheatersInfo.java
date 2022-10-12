@@ -54,7 +54,7 @@ public class TheatersInfo extends AppCompatActivity {
         address.setText(addressIntent);
         mAdapter    = new AdapterVenueInfo(productionList,this);
         QUEUE = Volley.newRequestQueue(this);
-        URLHTTP = "http://192.168.1.3:8080/api/venues/"+id+"/productions";
+        URLHTTP = "http://195.251.123.174:8080/api/venues/"+id+"/productions";
         httpGET(URLHTTP);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);

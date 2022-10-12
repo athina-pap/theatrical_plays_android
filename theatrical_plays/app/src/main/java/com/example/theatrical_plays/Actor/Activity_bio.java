@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -18,7 +17,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
-import com.example.theatrical_plays.ProductionInfo;
 import com.example.theatrical_plays.R;
 
 import org.json.JSONArray;
@@ -39,6 +37,7 @@ public class Activity_bio extends AppCompatActivity{
     RequestQueue QUEUE;
     String URLHTTP;
     String numberOfRoles;
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +51,7 @@ public class Activity_bio extends AppCompatActivity{
         TextView textView = findViewById(R.id.bioName);
         Intent intent = getIntent();
         String name = intent.getStringExtra("fullName");
-        int id = intent.getIntExtra("id",0);
+        id = intent.getIntExtra("id",0);
         textView.setText(name);
 
         mAdapter    = new Adapter(viewItems,this);
@@ -124,13 +123,18 @@ public class Activity_bio extends AppCompatActivity{
                     String imageURL = jo_inside.getString("imageURL");
                     ImagesList.add(new SlideModel(imageURL, null));
                 }
-                if(ImagesList.size()> 0) {
+                if(ImagesList.size() > 0) {
+                    if(id == 7544)
+                    {
+                        ImagesList.add(new SlideModel(R.drawable.actor3, null));
+                    }
                     images.setImageList(ImagesList);
                 }
                 else {
                     ImagesList.add(new SlideModel(R.drawable.actor1, null));
                     ImagesList.add(new SlideModel(R.drawable.actor2, null));
-                    ImagesList.add(new SlideModel(R.drawable.movie, null));
+                    ImagesList.add(new SlideModel(R.drawable.george, null));
+                    images.setImageList(ImagesList);
                 }
             }
 

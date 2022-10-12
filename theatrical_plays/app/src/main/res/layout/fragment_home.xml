@@ -30,10 +30,17 @@
         android:fontFamily="sans-serif-black"
         android:id="@+id/titleactor"
         android:text="Ηθοποιοί"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titlemain" />
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleactor"
+            app:dividerColor="@color/teal_700"/>
     <LinearLayout
         android:id="@+id/linearimage"
         android:layout_width="match_parent"
@@ -175,10 +182,17 @@
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-black"
         android:text="Παραστάσεις"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider" />
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleproduction"
+                app:dividerColor="@color/teal_700"/>
     <LinearLayout
         android:id="@+id/linearimageprod"
         android:layout_width="match_parent"
@@ -207,7 +221,7 @@
                     android:layout_height="match_parent"
                     android:background="#2d2d2d"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/movie"/>
+                    android:src="@drawable/george"/>
 
             </androidx.cardview.widget.CardView>
             <TextView
@@ -240,7 +254,7 @@
                     android:layout_height="match_parent"
                     android:background="#2d2d2d"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/movie"/>
+                    android:src="@drawable/george"/>
             </androidx.cardview.widget.CardView>
             <TextView
                 android:id="@+id/production2"
@@ -273,7 +287,7 @@
                     android:layout_height="match_parent"
                     android:background="#2d2d2d"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/movie"/>
+                    android:src="@drawable/george"/>
             </androidx.cardview.widget.CardView>
             <TextView
                 android:id="@+id/production3"
@@ -320,18 +334,27 @@
         >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <TextView
-        android:id="@+id/titlevenue"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Θέατρα"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/titlevenue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Θέατρα"
+            android:textAlignment="center"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titlevenue"
+            app:dividerColor="@color/teal_700"/>
     <LinearLayout
         android:id="@+id/linearimageVenue"
         android:layout_width="match_parent"

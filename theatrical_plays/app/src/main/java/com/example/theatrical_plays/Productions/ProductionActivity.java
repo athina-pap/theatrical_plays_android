@@ -77,7 +77,7 @@ public class ProductionActivity extends AppCompatActivity {
         String venue = null;
         if(events.size() == 0)
         {
-            lowerPrice.setText("Δεν υπάρχουν evrnts ");
+            lowerPrice.setText("Δεν υπάρχουν events ");
         }
         else {
             for (int i = 0; i < events.size(); i++) {
@@ -98,7 +98,7 @@ public class ProductionActivity extends AppCompatActivity {
         String venue = null;
         if(events.size() == 0)
         {
-            higherPrice.setText("Δεν υπάρχουν evrnts ");
+            higherPrice.setText("Δεν υπάρχουν events ");
         }
         else {
             for (int i = 0; i < events.size(); i++) {

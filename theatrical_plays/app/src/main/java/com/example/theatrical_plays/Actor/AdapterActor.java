@@ -55,7 +55,7 @@ public class AdapterActor extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             Picasso.get().load(url).placeholder(R.drawable.ic_actor).into(menuItemHolder.imageUrl);
         }
         else {
-            menuItemHolder.imageUrl.setImageResource(R.drawable.actor1);
+            menuItemHolder.imageUrl.setImageResource(R.drawable.ic_actor);
         }
 
         //((MenuItemViewHolder) holder).imageUrl.setOnClickListener(v -> listener.onClickData(actor.getImageUrl(), actor.getName(), actor.getId()));

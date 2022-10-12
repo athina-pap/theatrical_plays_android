@@ -163,11 +163,11 @@ public class ActorFragment extends Fragment implements ClickListener {
                 char[] chars = name.toCharArray();
                 StringBuilder sb = new StringBuilder();
                 for(char c : chars){
-                    if(Character.isDigit(c) || c == '$' || c == '"' || c=='.'){
+                    if(Character.isDigit(c) || c == '$' || c == '"' || c=='.' || c=='(' || c == '*' || c == '@' || c == '~' || c =='['){
                         sb.append(c);
                     }
                 }
-                if(sb.length() == 0) {
+                if(sb.length() == 0 && name.length() < 30) {
                     Actor actor = new Actor(name, imagUrl, id);
                     mRecyclerViewItems.add(actor);
                 }

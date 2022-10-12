@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Theatrical Analytics for Android</string>
+    <string name="app_name">Theatrical Analytics</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="urlserver">http://195.251.123.174:8080/api/people</string>

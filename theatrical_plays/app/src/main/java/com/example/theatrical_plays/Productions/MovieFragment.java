@@ -44,6 +44,7 @@ import java.util.List;
 public class MovieFragment extends Fragment {
     public static final String TAG = "MYTAG";
     private List<Production> mRecyclerViewItems = new ArrayList<>();
+    private ArrayList<Production> checkedProductionsCopy = new ArrayList<>();
     private AdapterProduction mAdapter;
     RecyclerView rv;
     RequestQueue QUEUE;
@@ -142,10 +143,15 @@ public class MovieFragment extends Fragment {
         compareProd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mAdapter.productionsClicked != null) {
+                for(Production x:mAdapter.productionsClicked )
+                {
+                    checkedProductionsCopy.add(x);
+                }
+                if(checkedProductionsCopy != null) {
                     Intent intent = new Intent(getContext(), ProductionActivity.class);
-                    intent.putExtra("productions", mAdapter.productionsClicked);
+                    intent.putExtra("productions", checkedProductionsCopy);
                     getActivity().startActivity(intent);
+                    checkedProductionsCopy.clear();
                 }
             }
         });
@@ -194,7 +200,13 @@ public class MovieFragment extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(String response)
+                    {
+                        if(mAdapter != null) {
+                            if (mAdapter.productionsClicked.size() > 0) {
+                                checkedProductionsCopy.addAll(mAdapter.productionsClicked);
+                            }
+                        }
                         parsingData(response);
                     }
                 }, new Response.ErrorListener() {
