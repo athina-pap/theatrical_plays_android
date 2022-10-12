@@ -101,7 +101,7 @@ public class ActorFragment extends Fragment implements ClickListener {
                 if(query != null) {
                     mRecyclerViewItems.clear();
                     QUEUE = Volley.newRequestQueue(getContext());
-                    URLHTTP = "http://laptop-t6ir0pds/api/people/search?q=fullName~" + query + "&page=2&size=20";
+                    URLHTTP = "http://195.251.123.174:8080/api/people/search?q=fullName~" + query ;
                     httpGET(URLHTTP);
                     setHasOptionsMenu(true);
                     return true;
@@ -155,15 +155,22 @@ public class ActorFragment extends Fragment implements ClickListener {
             JSONObject m_obj = obj.getJSONObject("data");
             JSONArray m_jArry = m_obj.getJSONArray("content");
 
-            for (int i = 0; i < m_jArry.length(); i++) {
+            for (int i = 20; i < m_jArry.length(); i++) {
                 JSONObject jo_inside = m_jArry.getJSONObject(i);
                 String name = jo_inside.getString("fullName");
                 String imagUrl = jo_inside.getString("image");
                 int id = jo_inside.getInt("id");
-
-                Actor actor= new Actor(name,imagUrl, id);
-                mRecyclerViewItems.add(actor);
-
+                char[] chars = name.toCharArray();
+                StringBuilder sb = new StringBuilder();
+                for(char c : chars){
+                    if(Character.isDigit(c) || c == '$' || c == '"' || c=='.'){
+                        sb.append(c);
+                    }
+                }
+                if(sb.length() == 0) {
+                    Actor actor = new Actor(name, imagUrl, id);
+                    mRecyclerViewItems.add(actor);
+                }
             }
             mAdapter    = new AdapterActor(mRecyclerViewItems,this);
             rv.setAdapter(mAdapter);

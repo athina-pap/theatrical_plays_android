@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         else {
             bottomNavigationView.getMenu().getItem(2).setChecked(true);
         }
+        getSupportActionBar().setTitle("Theatrical Analytics for Android");
     }
 
     public BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod= item -> {

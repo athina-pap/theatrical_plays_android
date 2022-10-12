@@ -96,8 +96,15 @@ public class HomeFragment extends Fragment {
        });
 
         ImageView prod1 = rootView.findViewById(R.id.imageprod1);
+        String url1 = "https://www.viva.gr/tickets/getattachment/d8b548e8-490c-488f-9939-afd8ed7e821c/%ce%a4%ce%9f-%ce%94%ce%99%ce%9a%ce%9f-%ce%9c%ce%91%ce%a3-%ce%a3%ce%99%ce%9d%ce%95%ce%9c%ce%91---Online-Streaminfc370b491-a9e4.png";
+        Picasso.get().load(url1).placeholder(R.drawable.ic_actor).into(prod1);
+
         ImageView prod2 = rootView.findViewById(R.id.imageprod2);
+        String url2 = "https://www.viva.gr/tickets/getattachment/4e365d06-7ac9-405e-b9d6-7b9b58ef1546/%ce%9f%ce%99-%ce%91%ce%98%ce%9b%ce%9f%ce%99-%ce%a4%ce%9f%ce%a5-%ce%97%ce%a1%ce%91%ce%9a%ce%9b%ce%97-%cf%84%ce%b7%cf%82-%ce%9a%ce%b1%cf%81%ce%bc%ce%b5%ce%bd-%ce%a1%ce%bf%cf%85%ce%b3%ce%b3%ce%b5%cf%81%ce%b7b91bdad8-83.png";
+        Picasso.get().load(url2).placeholder(R.drawable.ic_actor).into(prod2);
         ImageView prod3 = rootView.findViewById(R.id.imageprod3);
+        String url3 = "https://www.viva.gr/tickets/getattachment/74515bee-24f3-4145-b283-08311e71b95c/%ce%a0%ce%bf%ce%bd%cf%84%ce%b9%ce%ba%ce%bf%cf%80%ce%b1%ce%b3%ce%b9%ce%b4%ce%b14ca3d290-df96-42f4-81b3-cd17191138e8.png";
+        Picasso.get().load(url3).placeholder(R.drawable.ic_actor).into(prod3);
 
         prod1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +114,8 @@ public class HomeFragment extends Fragment {
                 int_detail.putExtra("id",509);
                 int_detail.putExtra("title", "Το δικό μας Σινεμά");
                 int_detail.putExtra("producer", "ΑΛΣΟΣ ΠΕΔΙΟΝ ΤΟΥ ΑΡΕΩΣ Ι.Κ.Ε");
-                int_detail.putExtra("url", "https://www.viva.gr/tickets/getattachment/d8b548e8-490c-488f-9939-afd8ed7e821c/%ce%a4%ce%9f-%ce%94%ce%99%ce%9a%ce%9f-%ce%9c%ce%91%ce%a3-%ce%a3%ce%99%ce%9d%ce%95%ce%9c%ce%91---Online-Streaminfc370b491-a9e4.png");
+                int_detail.putExtra("url", "https://www.youtube.com/watch?v=fe71U1g_GYU");
+                int_detail.putExtra("url1", "https://www.viva.gr/tickets/getattachment/d8b548e8-490c-488f-9939-afd8ed7e821c/%ce%a4%ce%9f-%ce%94%ce%99%ce%9a%ce%9f-%ce%9c%ce%91%ce%a3-%ce%a3%ce%99%ce%9d%ce%95%ce%9c%ce%91---Online-Streaminfc370b491-a9e4.png");
                 getActivity().startActivity(int_detail);
             }
         });
@@ -121,7 +129,8 @@ public class HomeFragment extends Fragment {
                 int_detail.putExtra("id",506);
                 int_detail.putExtra("title", "Οι Άθλοι του Ηρακλή");
                 int_detail.putExtra("producer", "WE PRODUCTION ΠΕΡΑΚΗΣ ΕΥΑΓΓΕΛΟΣ ΚΑΙ ΣΙΑ ΕΕ");
-                int_detail.putExtra("url", "https://www.viva.gr/tickets/getattachment/4e365d06-7ac9-405e-b9d6-7b9b58ef1546/%ce%9f%ce%99-%ce%91%ce%98%ce%9b%ce%9f%ce%99-%ce%a4%ce%9f%ce%a5-%ce%97%ce%a1%ce%91%ce%9a%ce%9b%ce%97-%cf%84%ce%b7%cf%82-%ce%9a%ce%b1%cf%81%ce%bc%ce%b5%ce%bd-%ce%a1%ce%bf%cf%85%ce%b3%ce%b3%ce%b5%cf%81%ce%b7b91bdad8-83.png");
+                int_detail.putExtra("url", "https://www.youtube.com/watch?v=Q4ATN4dtj48");
+                int_detail.putExtra("url1", "https://www.viva.gr/tickets/getattachment/4e365d06-7ac9-405e-b9d6-7b9b58ef1546/%ce%9f%ce%99-%ce%91%ce%98%ce%9b%ce%9f%ce%99-%ce%a4%ce%9f%ce%a5-%ce%97%ce%a1%ce%91%ce%9a%ce%9b%ce%97-%cf%84%ce%b7%cf%82-%ce%9a%ce%b1%cf%81%ce%bc%ce%b5%ce%bd-%ce%a1%ce%bf%cf%85%ce%b3%ce%b3%ce%b5%cf%81%ce%b7b91bdad8-83.png");
                 getActivity().startActivity(int_detail);
             }
         });
@@ -135,7 +144,8 @@ public class HomeFragment extends Fragment {
                 int_detail.putExtra("id",507);
                 int_detail.putExtra("title", "Ποντικοπαγίδα");
                 int_detail.putExtra("producer", "Happy Productions IKE");
-                int_detail.putExtra("url", "https://www.viva.gr/tickets/getattachment/74515bee-24f3-4145-b283-08311e71b95c/%ce%a0%ce%bf%ce%bd%cf%84%ce%b9%ce%ba%ce%bf%cf%80%ce%b1%ce%b3%ce%b9%ce%b4%ce%b14ca3d290-df96-42f4-81b3-cd17191138e8.png");
+                int_detail.putExtra("url", "https://www.youtube.com/watch?v=Qsi_TtBTfzU");
+                int_detail.putExtra("url1", "https://www.viva.gr/tickets/getattachment/74515bee-24f3-4145-b283-08311e71b95c/%ce%a0%ce%bf%ce%bd%cf%84%ce%b9%ce%ba%ce%bf%cf%80%ce%b1%ce%b3%ce%b9%ce%b4%ce%b14ca3d290-df96-42f4-81b3-cd17191138e8.png");
                 getActivity().startActivity(int_detail);
             }
         });

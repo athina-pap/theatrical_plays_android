@@ -65,7 +65,7 @@ public class ProductionActivity extends AppCompatActivity {
         for (int i= 0; i<productions.size(); i ++) {
             QUEUE = Volley.newRequestQueue(this);
             labels.add(productions.get(i).getTitle());
-            URLHTTP = "http://laptop-t6ir0pds:8080/api/productions/" + productions.get(i).getId() + "/events";
+            URLHTTP = "http://195.251.123.174:8080/api/productions/" + productions.get(i).getId() + "/events";
             httpGET(URLHTTP);
 
         }
@@ -75,35 +75,43 @@ public class ProductionActivity extends AppCompatActivity {
         double min = 100;
         String prod = null;
         String venue = null;
-        for(int i = 0; i<events.size(); i++)
+        if(events.size() == 0)
         {
-            double pricerange = FormatPrice(events.get(i).getPriceRange());
-
-            if(pricerange < min)
-            {
-                min = pricerange;
-                prod = events.get(i).getTitle();
-                venue = events.get(i).getVenueName();
-            }
+            lowerPrice.setText("Δεν υπάρχουν evrnts ");
         }
-        lowerPrice.setText("η παραγωγή " + prod + " στο Θέατρο " + venue + " με τιμή " + min);
+        else {
+            for (int i = 0; i < events.size(); i++) {
+                double pricerange = FormatPrice(events.get(i).getPriceRange());
+
+                if (pricerange < min) {
+                    min = pricerange;
+                    prod = events.get(i).getTitle();
+                    venue = events.get(i).getVenueName();
+                }
+            }
+            lowerPrice.setText("η παραγωγή " + prod + " στο Θέατρο " + venue + " με τιμή " + min);
+        }
     }
     public void Higher() {
         double max = 1;
         String prod = null;
         String venue = null;
-        for(int i = 0; i<events.size(); i++)
+        if(events.size() == 0)
         {
-            double pricerange = FormatPrice(events.get(i).getPriceRange());
-
-            if(pricerange > max)
-            {
-                max = pricerange;
-                prod = events.get(i).getTitle();
-                venue = events.get(i).getVenueName();
-            }
+            higherPrice.setText("Δεν υπάρχουν evrnts ");
         }
-        higherPrice.setText("η παραγωγή " + prod + " στο Θέατρο " + venue + " με τιμή " + max);
+        else {
+            for (int i = 0; i < events.size(); i++) {
+                double pricerange = FormatPrice(events.get(i).getPriceRange());
+
+                if (pricerange > max) {
+                    max = pricerange;
+                    prod = events.get(i).getTitle();
+                    venue = events.get(i).getVenueName();
+                }
+            }
+            higherPrice.setText("η παραγωγή " + prod + " στο Θέατρο " + venue + " με τιμή " + max);
+        }
     }
     private  void setUpBarChart()
     {
@@ -111,15 +119,15 @@ public class ProductionActivity extends AppCompatActivity {
             barDataSet = new BarDataSet(barEntriesArrayList, "eventNumber");
             barData = new BarData(barDataSet);
             allEvents.setData(barData);
-            barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-            barDataSet.setValueTextColor(Color.BLACK);
-            barDataSet.setValueTextSize(16f);
+            barDataSet.setColors(ColorTemplate.MATERIAL_COLORS); // χρώματα
+            barDataSet.setValueTextColor(Color.BLACK);// χρώμα αριθμών
+            barDataSet.setValueTextSize(16f);// μέγεθος τίτλου
             Description description = new Description();
             description.setText("Events");
-            allEvents.setDescription(description);
-            allEvents.animateY(1000);
+            allEvents.setDescription(description); // περιγραφή διαγράμματος
+            allEvents.animateY(1000); // animation φόρτωσης
             allEvents.invalidate();
-            //set XAxis formater
+            //set XAxis formater Διαδικασία δημιουργίας τίτλων ανά ράβδο
             XAxis xAxis = allEvents.getXAxis();
             xAxis.setLabelCount(labels.size());
             xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
@@ -213,7 +221,8 @@ public class ProductionActivity extends AppCompatActivity {
 
             Cheapest();
             Higher();
-            getBarEntries(eventsnumber, events);
+            if(events.size() > 0)
+            {getBarEntries(eventsnumber, events);}
             setUpBarChart();
         }
     }

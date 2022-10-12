@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/movie"
-        android:title="Movies"
+        android:title="Productions"
         android:icon="@drawable/ic_movies"/>
     <item
         android:id="@+id/home"

@@ -57,10 +57,10 @@ public class Activity_bio extends AppCompatActivity{
 
         mAdapter    = new Adapter(viewItems,this);
         QUEUE = Volley.newRequestQueue(this);
-        URLHTTP = "http://laptop-t6ir0pds:8080/api/people/"+id+"/productions";
+        URLHTTP = "http://195.251.123.174:8080/api/people/"+id+"/productions";
         httpGET(URLHTTP, "productions");
         QUEUE = Volley.newRequestQueue(this);
-        URLHTTP = "http://laptop-t6ir0pds:8080/api/people/"+id+"/photos";
+        URLHTTP = "http://195.251.123.174:8080/api/people/"+id+"/photos";
         httpGET(URLHTTP, "images");
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);

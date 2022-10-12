@@ -6,13 +6,18 @@ import android.transition.AutoTransition;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -57,7 +62,9 @@ public class MovieFragment extends Fragment {
         return movieFragment;
     }
 
-
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -101,7 +108,7 @@ public class MovieFragment extends Fragment {
                     already = false;
                     mRecyclerViewItems.clear();
                     QUEUE = Volley.newRequestQueue(getContext());
-                    URLHTTP = "http://laptop-t6ir0pds:8080/api/productions/latest";
+                    URLHTTP = "http://195.251.123.174:8080/api/productions/latest";
                     httpGET(URLHTTP);
                     setHasOptionsMenu(true);
 
@@ -124,7 +131,7 @@ public class MovieFragment extends Fragment {
                 latest.setChecked(false);
                 mRecyclerViewItems.clear();
                 QUEUE = Volley.newRequestQueue(getContext());
-                URLHTTP = "http://laptop-t6ir0pds:8080/api/productions";
+                URLHTTP = "http://195.251.123.174:8080/api/productions";
                 httpGET(URLHTTP);
                 setHasOptionsMenu(true);
                 already = true;
@@ -146,7 +153,42 @@ public class MovieFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.search_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) searchItem.getActionView();
 
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                if(query != null) {
+                    mRecyclerViewItems.clear();
+                    QUEUE = Volley.newRequestQueue(getContext());
+                    URLHTTP = "http://195.251.123.174:8080/api/productions/search?q=title~" + query ;
+                    httpGET(URLHTTP);
+                    setHasOptionsMenu(true);
+                    return true;
+                }
+                else {
+                    mRecyclerViewItems.clear();
+                    QUEUE = Volley.newRequestQueue(getContext());
+                    URLHTTP = getResources().getString(R.string.productions);
+                    httpGET(URLHTTP);
+                    setHasOptionsMenu(true);
+                    return true;
+                }
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        super.onCreateOptionsMenu(menu,inflater);
+    }
 
     private void httpGET(String url) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,

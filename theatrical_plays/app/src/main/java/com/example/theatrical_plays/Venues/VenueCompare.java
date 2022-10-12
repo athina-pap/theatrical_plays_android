@@ -62,7 +62,7 @@ public class VenueCompare extends AppCompatActivity {
         map = findViewById(R.id.mapVenues);
         for (int i= 0; i<venues.size(); i ++) {
             QUEUE = Volley.newRequestQueue(this);
-            URLHTTP = "http://laptop-t6ir0pds:8080/api/venues/" + venues.get(i).getId() + "/productions";
+            URLHTTP = "http://195.251.123.174:8080/api/venues/" + venues.get(i).getId() + "/productions";
             httpGET(URLHTTP);
         }
         Context self = this;

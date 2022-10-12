@@ -25,6 +25,7 @@ import com.example.theatrical_plays.Actor.AdapterActor;
 import com.example.theatrical_plays.Actor.Bio;
 import com.example.theatrical_plays.Productions.Events;
 import com.example.theatrical_plays.R;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,15 +56,21 @@ public class ProductionInfo extends AppCompatActivity {
         String Desc = intent.getStringExtra("desc");
         String prod = intent.getStringExtra("producer");
         String url = intent.getStringExtra("url");
+        String url1 = intent.getStringExtra("url1");
         int id = intent.getIntExtra("id", 0);
         textView.setText(title);
         description.setText(Desc);
         String prod1 = prod.replaceAll("\\s+ ", " ");
         prod.replace("\r\n", "");
         producer.setText(prod1);
+        ImageView imageProd = findViewById(R.id.image_default);
+        if(url1 != null)
+        {Picasso.get().load(url1).placeholder(R.drawable.ic_actor).into(imageProd);}
+        else
+        {Picasso.get().load(url).placeholder(R.drawable.ic_actor).into(imageProd);}
         mAdapter    = new AdapterEvent(eventsList,this);
         QUEUE = Volley.newRequestQueue(this);
-        URLHTTP = "http://laptop-t6ir0pds:8080/api/productions/"+id+"/events";
+        URLHTTP = "http://195.251.123.174:8080/api/productions/"+id+"/events";
         httpGET(URLHTTP);
         layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
